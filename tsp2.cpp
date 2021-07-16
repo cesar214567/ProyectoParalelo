@@ -102,7 +102,6 @@ int main()
                     {15, 35, 0, 30},
                     {20, 25, 30, 0}
     };
-
     TSP(adj);
 
     printf("Minimum cost : %d\n", final_res);
