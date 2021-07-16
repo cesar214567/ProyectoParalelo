@@ -3,6 +3,7 @@
 // https://www.youtube.com/watch?v=1FEP_sNb62k&ab_channel=AbdulBari Branch and Bound
 
 using namespace std;
+#define pi 3.14159265358979323846
 
 // Function to copy temporary solution to
 // the final solution
@@ -131,9 +132,4 @@ int main()
         printf("%d ", final_path[i]);
 
     return 0;
-}
-
-void createdb(){
-    fstream file("nodos.txt");
-
 }
