@@ -67,9 +67,7 @@ int secondMin(int adj[N][N], int i)
 //         space tree
 // curr_path[] -> where the solution is being stored which
 //                would later be copied to final_path[]
-void TSPRec(int adj[N][N], int &curr_bound, int curr_weight,
-            int level, int curr_path[])
-{
+void TSPRec(int adj[N][N], int &curr_bound, int curr_weight, int level, int curr_path[]){
     
     // base case is when we have reached level N which
     // means we have covered all the nodes once
@@ -136,8 +134,8 @@ void TSPRec(int adj[N][N], int &curr_bound, int curr_weight,
 }
 
 // This function sets up final_path[] 
-void TSP(int adj[N][N])
-{
+void TSP(int adj[N][N]){
+
     int curr_path[N+1];
 
     // Calculate initial lower bound for the root node
@@ -163,24 +161,4 @@ void TSP(int adj[N][N])
     // Call to TSPRec for curr_weight equal to
     // 0 and level 1
     TSPRec(adj, curr_bound, 0, 1, curr_path);
-}
-
-// Driver code
-int main()
-{
-    //Adjacency matrix for the given graph
-    int adj[N][N] = { 
-                    {0, 10, 15, 20},
-                    {10, 0, 35, 25},
-                    {15, 35, 0, 30},
-                    {20, 25, 30, 0}
-    };
-    TSP(adj);
-
-    printf("Minimum cost : %d\n", final_res);
-    printf("Path Taken : ");
-    for (int i=0; i<=N; i++)
-        printf("%d ", final_path[i]);
-
-    return 0;
 }
