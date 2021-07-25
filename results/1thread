@@ -1,0 +1,6 @@
+7 1 8 2 3 9 6 4 5 
+Reference minimum cost:62.107
+*Our algorithm: 
+Time taken for TSP: 739016 microseconds
+Minimum cost : 62.107020
+Path Taken : 0 7 1 8 2 3 9 6 4 5 0 

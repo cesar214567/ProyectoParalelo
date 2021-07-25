@@ -13,14 +13,11 @@ vector<int> travllingSalesmanProblem(double graph[][V], int s)
     for (int i = 0; i < V; i++)
         if (i != s)
             vertex.push_back(i);
- 
     // store minimum weight Hamiltonian Cycle.
     double min_path = INT_MAX;
     do {
- 
         // store current Path weight(cost)
         double current_pathweight = 0;
- 
         // compute current path weight
         int k = s;
         for (int i = 0; i < vertex.size(); i++) {
@@ -28,16 +25,13 @@ vector<int> travllingSalesmanProblem(double graph[][V], int s)
             k = vertex[i];
         }
         current_pathweight += graph[k][s];
- 
         // update minimum   
         if(min(min_path,current_pathweight)==current_pathweight){
             shortest_path=vertex;
         }
         min_path = min(min_path, current_pathweight);
-    
     } while (
         next_permutation(vertex.begin(), vertex.end()));
- 
     return shortest_path;
 }
  
@@ -55,12 +49,10 @@ int main()
     for(int i=0;i<V;i++){
         for(int j = 0;j<V;j++){
             graph[i][j] = adj[i][j];
-            cout<<graph[i][j]<<" ";
-        }cout<<endl;
+            //cout<<graph[i][j]<<" ";
+        }//cout<<endl;
     }
-    
     int s = 0;
-    //cout << travllingSalesmanProblem(graph, s) << endl;
     auto shortest = travllingSalesmanProblem(graph, s);
     int temp = 0;
     double costo = 0;
@@ -72,23 +64,28 @@ int main()
     }
     cout<<endl; 
     costo+= graph[temp][0];
-    cout<<"suposed minimum cost:"<<costo<<endl;
+    cout<<"Reference minimum cost:"<<costo<<endl;
+    cout << "*Our algorithm: \n";
 
     int final_path[V+1];
     bool visited[V];
     double final_res = INT_MAX;
+    auto start = std::chrono::high_resolution_clock::now();
     TSP(adj,V,visited,final_res,final_path);
+    auto stop = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+    cout << "Time taken for TSP: " << duration.count() << " microseconds" << endl;
+
 
     double costo_real=0;
     printf("Minimum cost : %f\n", final_res);
     printf("Path Taken : ");
     for (int i=0; i<=V; i++){
         printf("%d ", final_path[i]);
-        //if (i>0)cout<<graph[final_path[i-1]][final_path[i]]<<" " ;
-        if (i>0)costo_real+=graph[final_path[i-1]][final_path[i]] ;
+        //if (i>0)costo_real+=graph[final_path[i-1]][final_path[i]] ;
     }
         
-    cout<<"real cost: "<<costo_real<<endl;
+    //cout<<"\nReal cost: "<<costo_real<<endl;
 
     return 0;
 }

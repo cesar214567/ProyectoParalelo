@@ -56,7 +56,7 @@ void TSPRec(vector<vector<double>> adj,int n, double &curr_bound, double curr_we
         return;
     }
     vector<pair<double,int>> good_branches;
-    #pragma omp parallel for num_threads(8)
+    #pragma omp parallel for num_threads(10)
     for (int i=0; i<n; ++i)
     {
         if (adj[curr_path[level-1]][i] != 0 && !visited[i])
