@@ -51,7 +51,3 @@ void createdb(){
     }
     output.close();
 }
-
-int main(){
-    createdb();
-}
