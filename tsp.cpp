@@ -7,16 +7,16 @@ using namespace std;
 
 // Function to copy temporary solution to
 // the final solution
-pair<vector<string>,vector<vector<double>>> getData(string filename,int n){
+pair<vector<string>,vector<vector<double_t>>> getData(string filename,int n){
     fstream file(filename);
     string name;
-    double temp;
+    double_t temp;
     vector<string> names;
-    vector<vector<double>>data; 
+    vector<vector<double_t>>data; 
     
     for(int i=0;i<n;i++){
         file>>name;
-        vector<double> sub_data;
+        vector<double_t> sub_data;
         for(int j=0;j<n;j++){
             file>>temp;
             sub_data.push_back(temp);
@@ -37,15 +37,15 @@ void copyToFinal(int curr_path[],int final_path[],int n)
     final_path[n] = curr_path[0];
 }
 
-void TSPRec(vector<vector<double>> adj,int n, double &curr_bound, double curr_weight,
-            int level, int curr_path[],bool visited[],double &final_res,int final_path[])
+void TSPRec(vector<vector<double_t>> adj,int n, double_t &curr_bound, double_t curr_weight,
+            int level, int curr_path[],bool visited[],double_t &final_res,int final_path[])
 {
     
     if (level==n)
     {
         if (adj[curr_path[level-1]][curr_path[0]] != 0)
         {
-            double curr_res = curr_weight + adj[curr_path[level-1]][curr_path[0]];
+            double_t curr_res = curr_weight + adj[curr_path[level-1]][curr_path[0]];
             if (curr_res < final_res)
             {
                 copyToFinal(curr_path,final_path,n);
@@ -55,8 +55,8 @@ void TSPRec(vector<vector<double>> adj,int n, double &curr_bound, double curr_we
         }
         return;
     }
-    vector<pair<double,int>> good_branches;
-    #pragma omp parallel for num_threads(10)
+    vector<pair<double_t,int>> good_branches;
+    #pragma omp parallel for num_threads(4)
     for (int i=0; i<n; ++i)
     {
         if (adj[curr_path[level-1]][i] != 0 && !visited[i])
@@ -71,7 +71,7 @@ void TSPRec(vector<vector<double>> adj,int n, double &curr_bound, double curr_we
     }
     sort(good_branches.begin(),good_branches.end());
     for (auto it:good_branches){
-        double temp = curr_bound;
+        double_t temp = curr_bound;
         curr_weight = it.first;
         int i = it.second;
         if (curr_bound > curr_weight)
@@ -88,10 +88,10 @@ void TSPRec(vector<vector<double>> adj,int n, double &curr_bound, double curr_we
     }
 }
 
-void TSP(vector<vector<double>> adj,int n,bool visited[],double &final_res,int final_path[])
+void TSP(vector<vector<double_t>> adj,int n,bool visited[],double_t &final_res,int final_path[])
 {
     int curr_path[n+1];
-    double curr_bound = 0;
+    double_t curr_bound = 0;
     memset(curr_path, -1, sizeof(curr_path));
     memset(visited, 0, sizeof(curr_path));
     curr_bound = INT_MAX;

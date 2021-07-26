@@ -5,7 +5,7 @@ using namespace std;
 #define V 10
  
 // implementation of traveling Salesman Problem
-vector<int> travllingSalesmanProblem(double graph[][V], int s)
+vector<int> travllingSalesmanProblem(double_t graph[][V], int s)
 {
     // store all vertex apart from source vertex
     vector<int> vertex;
@@ -14,10 +14,10 @@ vector<int> travllingSalesmanProblem(double graph[][V], int s)
         if (i != s)
             vertex.push_back(i);
     // store minimum weight Hamiltonian Cycle.
-    double min_path = INT_MAX;
+    double_t min_path = INT_MAX;
     do {
         // store current Path weight(cost)
-        double current_pathweight = 0;
+        double_t current_pathweight = 0;
         // compute current path weight
         int k = s;
         for (int i = 0; i < vertex.size(); i++) {
@@ -42,7 +42,7 @@ vector<int> travllingSalesmanProblem(double graph[][V], int s)
 int main()
 {
     // matrix representation of graph
-    double graph[V][V] ;
+    double_t graph[V][V] ;
     auto data = getData("matrix.txt",10);
     vector<string> names = data.first;
     auto adj = data.second;
@@ -55,7 +55,7 @@ int main()
     int s = 0;
     auto shortest = travllingSalesmanProblem(graph, s);
     int temp = 0;
-    double costo = 0;
+    double_t costo = 0;
     for(int i=0;i<shortest.size();i++ ){
         int it = shortest[i];
         costo+=graph[temp][it];
@@ -69,7 +69,7 @@ int main()
 
     int final_path[V+1];
     bool visited[V];
-    double final_res = INT_MAX;
+    double_t final_res = INT_MAX;
     auto start = std::chrono::high_resolution_clock::now();
     TSP(adj,V,visited,final_res,final_path);
     auto stop = std::chrono::high_resolution_clock::now();
@@ -77,7 +77,7 @@ int main()
     cout << "Time taken for TSP: " << duration.count() << " microseconds" << endl;
 
 
-    double costo_real=0;
+    double_t costo_real=0;
     printf("Minimum cost : %f\n", final_res);
     printf("Path Taken : ");
     for (int i=0; i<=V; i++){

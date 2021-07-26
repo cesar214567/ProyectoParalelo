@@ -3,12 +3,12 @@
 using namespace std;
 #define pi 3.14159265358979323846
 
-double toRad(double degree) {
+double_t toRad(double_t degree) {
     return degree/180 * pi;
 }
 
-double calculateDistance(double lat1, double long1, double lat2, double long2) {
-    double dist;
+double_t calculateDistance(double_t lat1, double_t long1, double_t lat2, double_t long2) {
+    double_t dist;
     dist = sin(toRad(lat1)) * sin(toRad(lat2)) + cos(toRad(lat1)) * cos(toRad(lat2)) * cos(toRad(long1 - long2));
     dist = acos(dist);
 //        dist = (6371 * pi * dist) / 180;
@@ -20,7 +20,7 @@ double calculateDistance(double lat1, double long1, double lat2, double long2) {
 
 void createdb(){
     fstream file;
-    vector<pair<double,double>> datos;
+    vector<pair<double_t,double_t>> datos;
     vector <string> names;
     file.open("nodos.txt", ios::in);
     string name, lng ,lat;
@@ -31,7 +31,7 @@ void createdb(){
         names.push_back(name);
         cout << lng << endl;
         cout << lat << endl;
-        auto pr = pair<double,double>(stod(lng),stod(lat));
+        auto pr = pair<double_t,double_t>(stod(lng),stod(lat));
         datos.push_back(pr);
     }
     file.close();
