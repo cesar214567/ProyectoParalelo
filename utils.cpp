@@ -3,19 +3,14 @@
 using namespace std;
 #define pi 3.14159265358979323846
 
-
-
-
 double toRad(double degree) {
     return degree/180 * pi;
 }
 
-double calculateDistance(double lat1, double long1, double lat2, double long2) {
+double calculateDistance(double lat1, double long1, double lat2, double long2){
     double dist;
     dist = sin(toRad(lat1)) * sin(toRad(lat2)) + cos(toRad(lat1)) * cos(toRad(lat2)) * cos(toRad(long1 - long2));
     dist = acos(dist);
-//        dist = (6371 * pi * dist) / 180;
-    //got dist in radian, no need to change back to degree and convert to rad again.
     dist = 6371 * dist;
     return dist;
 }
