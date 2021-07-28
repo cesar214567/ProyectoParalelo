@@ -18,7 +18,7 @@ double calculateDistance(double lat1, double long1, double lat2, double long2){
 
 void createdb(){
     fstream file;
-    vector<pair<double,double>> datos;
+    vector<pair<double_t,double_t>> datos;
     vector <string> names;
     file.open("nodos.txt", ios::in);
     string name, lng ,lat;
@@ -29,7 +29,7 @@ void createdb(){
         names.push_back(name);
         cout << lng << endl;
         cout << lat << endl;
-        auto pr = pair<double,double>(stod(lng),stod(lat));
+        auto pr = pair<double_t,double_t>(stod(lng),stod(lat));
         datos.push_back(pr);
     }
     file.close();
@@ -45,8 +45,4 @@ void createdb(){
         output << '\n';
     }
     output.close();
-}
-
-int main(){
-    createdb();
 }
