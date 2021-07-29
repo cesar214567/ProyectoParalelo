@@ -72,3 +72,42 @@ pair<vector<string>,vector<vector<double_t>>> getData(string filename, string fi
     return {names,data};
 }
 
+vector<vector<double>> inputData(int n){
+    double lat, lng;
+    vector<vector<double>> matrix;
+    for(int i = 0; i < n; i++)
+        matrix.emplace_back(vector<double>(n));
+
+    vector<pair<double,double>> datos; 
+    double time_per_km = 60;
+    cout << "Ingrese velocidad(Km/h): ";
+    cin >> time_per_km;
+
+    for(int i = 0; i < n; i++){
+        cout << "Ubicacion " << i << endl;
+        cout << "Ingrese Latitud: "; 
+        cin >> lng;
+        cout << "Ingrese Longitud: "; 
+        cin >> lat;
+        datos.push_back(pair<double_t,double_t>(lng,lat));
+    }
+
+    const double km_minute= time_per_km/60;
+    for(int i=0; i< datos.size(); i++){
+        for(int j = 0; j < datos.size(); j++){
+            auto dist = calculateDistance(datos[i].first, datos[i].second, datos[j].first, datos[j].second);
+            matrix[i][j] = (dist + dist/km_minute)/2;
+        }
+    }
+    //for(int i=0; i< datos.size(); i++){
+    //    for(int j = 0; j < datos.size(); j++)
+    //        cout << matrix[i][j] << " ";
+    //    cout << endl;
+    //}
+    return matrix;
+}
+
+
+//int main(){
+//    auto g = inputData(3);
+//}

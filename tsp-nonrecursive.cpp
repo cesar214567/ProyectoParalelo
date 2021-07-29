@@ -34,15 +34,14 @@ void TSPRec(vector<vector<double_t>> &adj,int n, double_t &curr_bound, double_t 
         level = lvl.top();
         cout << " level: " << level << endl;
         curr_weight = c_w.top();
-        curr_bound = c_b.top();
+        //curr_bound = c_b.top();
         final_res = f_res.top();
 
         f_res.pop();
-        c_b.pop();
+       // c_b.pop();
         c_w.pop();
         lvl.pop();
         camino.pop();
-        return;
         if (level==n)
         {
             if (adj[curr_path[level-1]][curr_path[0]] != 0)
@@ -86,7 +85,7 @@ void TSPRec(vector<vector<double_t>> &adj,int n, double_t &curr_bound, double_t 
                 visited[i] = true;
                 camino.push(i);
                 lvl.push(level+1);
-                c_b.push(curr_bound);
+                //c_b.push(curr_bound);
                 c_w.push(curr_weight);
                 f_res.push(final_res);
                 //TSPRec(adj,n, curr_bound, curr_weight, level+1, curr_path,visited,final_res,final_path);
