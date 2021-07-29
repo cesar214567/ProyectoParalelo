@@ -33,7 +33,7 @@ void createdb(){
         datos.push_back(pr);
     }
     file.close();
-    ofstream output("matrix.txt");
+    ofstream output("matrix_tiempo.txt");
     for(int i=0; i< datos.size(); i++){
         output << names[i];
         for(int j = 0; j < datos.size(); j++){
@@ -46,3 +46,29 @@ void createdb(){
     }
     output.close();
 }
+
+
+pair<vector<string>,vector<vector<double_t>>> getData(string filename, string filename2,int n){
+    fstream file_distance(filename);
+    fstream file_time(filename2);
+    string name;
+    double_t temp;
+    double_t temp2;   
+    vector<string> names;
+    vector<vector<double_t>>data; 
+    
+    for(int i=0;i<n;i++){
+        file_distance>>name;
+        file_time >> name;
+        vector<double_t> sub_data;
+        for(int j=0;j<n;j++){
+            file_distance >>temp;
+            file_time >> temp2;
+            sub_data.push_back((temp+temp2)/2.0);
+        }    
+        data.push_back(sub_data);
+        names.push_back(name);
+    }
+    return {names,data};
+}
+

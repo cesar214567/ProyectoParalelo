@@ -1,22 +1,26 @@
-#include "tsp.cpp"
 
 // implementation of traveling Salesman Problem
-vector<int> travllingSalesmanProblem(double graph[][4], int s)
+#include <bits/stdc++.h>
+#include "tsp.cpp"
+
+using namespace std;
+#define V 4
+ 
+// implementation of traveling Salesman Problem
+vector<int> travllingSalesmanProblem(double_t graph[][4], int s)
 {
     // store all vertex apart from source vertex
+    auto t_start = std::chrono::high_resolution_clock::now();
     vector<int> vertex;
     vector<int> shortest_path;
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < V; i++)
         if (i != s)
             vertex.push_back(i);
- 
     // store minimum weight Hamiltonian Cycle.
-    double min_path = INT_MAX;
+    double_t min_path = INT_MAX;
     do {
- 
         // store current Path weight(cost)
-        double current_pathweight = 0;
- 
+        double_t current_pathweight = 0;
         // compute current path weight
         int k = s;
         for (int i = 0; i < vertex.size(); i++) {
@@ -24,18 +28,20 @@ vector<int> travllingSalesmanProblem(double graph[][4], int s)
             k = vertex[i];
         }
         current_pathweight += graph[k][s];
- 
         // update minimum   
         if(min(min_path,current_pathweight)==current_pathweight){
             shortest_path=vertex;
         }
         min_path = min(min_path, current_pathweight);
-    
     } while (
         next_permutation(vertex.begin(), vertex.end()));
- 
+    auto t_end = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>( t_end-t_start);
+    cout << "Time taken for real TSP: " << duration.count() << " microseconds" << endl;
     return shortest_path;
 }
+ 
+
 
 void test(vector<vector<double>> adj, double adj2[][4]){ 
     int n = adj.size();
@@ -64,6 +70,7 @@ void test(vector<vector<double>> adj, double adj2[][4]){
     cout<<"Real minimum cost: "<<costo<<endl;    
     cout << "---------------------------" << endl;
 }
+
 
 void copy_matrix(vector<vector<double>> &to,double from[][4]){ 
     int n = to.size();

@@ -1,17 +1,18 @@
+
+// implementation of traveling Salesman Problem
 #include <bits/stdc++.h>
 #include "tsp.cpp"
 
 using namespace std;
-#define V 10
  
 // implementation of traveling Salesman Problem
-vector<int> travllingSalesmanProblem(double_t graph[][V], int s)
+vector<int> travllingSalesmanProblem(vector<vector<double_t>> &graph, int s)
 {
     // store all vertex apart from source vertex
     auto t_start = std::chrono::high_resolution_clock::now();
     vector<int> vertex;
     vector<int> shortest_path;
-    for (int i = 0; i < V; i++)
+    for (int i = 0; i < graph.size(); i++)
         if (i != s)
             vertex.push_back(i);
     // store minimum weight Hamiltonian Cycle.
@@ -39,54 +40,61 @@ vector<int> travllingSalesmanProblem(double_t graph[][V], int s)
     return shortest_path;
 }
  
-
-
-
-// Driver Code
-int main()
-{
-    
-    // matrix representation of graph
-    double_t graph[V][V] ;
-    auto data = getData("./data/matrix_distancia.txt","./data/matrix_tiempo.txt",10);
-    vector<string> names = data.first;
-    auto adj = data.second;
-    for(int i=0;i<V;i++){
-        for(int j = 0;j<V;j++){
-            graph[i][j] = adj[i][j];
-            //cout<<graph[i][j]<<" ";
-        }//cout<<endl;
+void genRandomNumbers(vector<vector<double_t>>& adj){
+    for(int i =0;i<adj.size();i++){
+        for(int j = 0;j< adj.size();j++){
+            adj[i][j] = 10.0 + static_cast <double_t> (rand()) /( static_cast <double_t> (RAND_MAX/(25.0-10.0)));
+        }
     }
-    int s = 0;
-    auto shortest = travllingSalesmanProblem(graph, s);
+}
+
+void test(){ 
+    int n = 13;
+    int final_path[n+1];
+    bool visited[n];
+    double final_res = INT_MAX;
+    vector<vector<double_t>> adj;
+    adj.resize(n);
+    for(int i=0;i<adj.size();i++) adj[i].resize(n);
+    genRandomNumbers(adj);
+    
+    TSP(adj,n,visited,final_res,final_path);
+
+    printf("Minimum cost : %f\n", final_res);
+    printf("Path Taken : ");
+    for (int i=0; i<=n; i++)
+        printf("%d ", final_path[i]);
+    printf("\n");
+    
+    auto shortest = travllingSalesmanProblem(adj, 0);
     int temp = 0;
-    double_t costo = 0;
-    for(int i=0;i<shortest.size();i++ ){
+    double costo = 0;
+    for(int i=0;i<shortest.size();i++){
         int it = shortest[i];
-        costo+=graph[temp][it];
+        costo+=adj[temp][it];
         temp = it;
         cout<< it<<" ";
     }
     cout<<endl; 
-    costo+= graph[temp][0];
-    cout<<"Reference minimum cost:"<<costo<<endl;
-    cout << "*Our algorithm: \n";
+    costo+= adj[temp][0];
+    cout<<"Real minimum cost: "<<costo<<endl;    
+    cout << "---------------------------" << endl;
+}
 
-    int final_path[V+1];
-    bool visited[V];
-    double_t final_res = INT_MAX;
-    TSP(adj,V,visited,final_res,final_path);
-    
 
-    double_t costo_real=0;
-    printf("Minimum cost : %f\n", final_res);
-    printf("Path Taken : ");
-    for (int i=0; i<=V; i++){
-        printf("%d ", final_path[i]);
-        if (i>0)costo_real+=graph[final_path[i-1]][final_path[i]] ;
+void copy_matrix(vector<vector<double>> &to,double from[][4]){ 
+    int n = to.size();
+    for (int i=0;i<n;i++){
+        for (int j=0;j<n;j++){
+            to[i][j] = from[i][j]; 
+        }
     }
-        
-    cout<<"\nReal cost: "<<costo_real<<endl;
 
+}
+int main()
+{
+    srand(time(NULL));
+    test();
+    
     return 0;
 }
