@@ -58,5 +58,6 @@ void exec_optimization(){
 }
 
 int main(){
-    exec_optimization();
+  test(10);  
+  exec_optimization();
 }

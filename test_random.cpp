@@ -48,8 +48,8 @@ void genRandomNumbers(vector<vector<double_t>>& adj){
     }
 }
 
-void test(){ 
-    int n = 10;
+void test(int n){ 
+    
     int final_path[n+1];
     bool visited[n];
     double final_res = INT_MAX;
@@ -92,10 +92,10 @@ void copy_matrix(vector<vector<double>> &to,double from[][4]){
 
 }
 
-//int main()
-//{
-//    //srand(time(NULL));
-//    test();
-//    
-//    return 0;
-//}
+/*int main()
+{
+    //srand(time(NULL));
+    test(10);
+    
+    return 0;
+}*/
