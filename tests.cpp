@@ -81,7 +81,7 @@ void copy_matrix(vector<vector<double>> &to,double from[][4]){
     }
 
 }
-/*int main()
+int main()
 {
     // auto data = getData("matrix.txt",10);
     // vector<string> names = data.first;
@@ -133,4 +133,3 @@ void copy_matrix(vector<vector<double>> &to,double from[][4]){
     
     return 0;
 }
-*/
