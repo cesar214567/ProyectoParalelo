@@ -13,7 +13,7 @@ int cont = 0;
 
 void copyToFinal(int curr_path[],int final_path[],int n)
 {
-    #pragma omp parallel for num_threads(4)
+    #pragma omp parallel for num_threads(10)
     for (int i=0; i<n; i++)
         final_path[i] = curr_path[i];
     final_path[n] = curr_path[0];
@@ -49,15 +49,12 @@ void TSPRec(vector<vector<double_t>> &adj,int n, double_t &curr_bound, double_t 
             {
                 auto temp = make_pair(curr_weight+adj[curr_path[level-1]][i],i);
                 #pragma omp critical
-                //good_branches.push(temp);
                 good_branches.push_back(temp);
             }
         }
     } 
     sort(good_branches.begin(),good_branches.end());
-    //while(!good_branches.empty()) {
-    //    auto it = good_branches.top();
-    //    good_branches.pop();
+    
     for (auto it:good_branches){
         double_t temp = curr_bound;
         curr_weight = it.first;

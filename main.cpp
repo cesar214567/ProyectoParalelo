@@ -46,16 +46,20 @@ vector<int> travllingSalesmanProblem(double_t graph[][V], int s)
 int main()
 {
     
+    //optimization
+
+
+
     // matrix representation of graph
-    double_t graph[V][V] ;
+    double_t graph[V][V];
+
     auto data = getData("./data/matrix_distancia.txt","./data/matrix_tiempo.txt",10);
     vector<string> names = data.first;
     auto adj = data.second;
     for(int i=0;i<V;i++){
         for(int j = 0;j<V;j++){
             graph[i][j] = adj[i][j];
-            //cout<<graph[i][j]<<" ";
-        }//cout<<endl;
+        }
     }
     int s = 0;
     auto shortest = travllingSalesmanProblem(graph, s);

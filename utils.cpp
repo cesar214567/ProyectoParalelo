@@ -20,7 +20,7 @@ void createdb(){
     fstream file;
     vector<pair<double_t,double_t>> datos;
     vector <string> names;
-    file.open("nodos.txt", ios::in);
+    file.open("data/nodos.txt", ios::in);
     string name, lng ,lat;
     while (!file.eof()){
         file >> name;
@@ -84,10 +84,10 @@ vector<vector<double>> inputData(int n){
     cin >> time_per_km;
 
     for(int i = 0; i < n; i++){
-        cout << "Ubicacion " << i << endl;
-        cout << "Ingrese Latitud: "; 
-        cin >> lng;
+        cout << "Ubicacion " << i+1 << endl;
         cout << "Ingrese Longitud: "; 
+        cin >> lng;
+        cout << "Ingrese Latitud: "; 
         cin >> lat;
         datos.push_back(pair<double_t,double_t>(lng,lat));
     }
@@ -99,15 +99,7 @@ vector<vector<double>> inputData(int n){
             matrix[i][j] = (dist + dist/km_minute)/2;
         }
     }
-    //for(int i=0; i< datos.size(); i++){
-    //    for(int j = 0; j < datos.size(); j++)
-    //        cout << matrix[i][j] << " ";
-    //    cout << endl;
-    //}
+    
     return matrix;
 }
 
-
-//int main(){
-//    auto g = inputData(3);
-//}

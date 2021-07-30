@@ -22,8 +22,8 @@ void TSPRec(vector<vector<double_t>> &adj,int n, double_t &curr_bound, double_t 
     stack<int> lvl;
     stack<double_t> c_b;
     stack<double_t> c_w;
-    stack<double_t> f_res;
-    f_res.push(final_res) ;
+    //stack<double_t> f_res;
+    //f_res.push(final_res) ;
     c_w.push(curr_weight);
     lvl.push(level);
     c_b.push(curr_bound);
@@ -35,9 +35,9 @@ void TSPRec(vector<vector<double_t>> &adj,int n, double_t &curr_bound, double_t 
         cout << " level: " << level << endl;
         curr_weight = c_w.top();
         //curr_bound = c_b.top();
-        final_res = f_res.top();
+        //final_res = f_res.top();
 
-        f_res.pop();
+      // f_res.pop();
        // c_b.pop();
         c_w.pop();
         lvl.pop();
